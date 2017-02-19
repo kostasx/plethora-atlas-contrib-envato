@@ -1,0 +1,13 @@
+{
+  "name": "plethora-atlas-contrib-envato",
+  "version": "0.1.0",
+  "description": "Envato Utilities for the Plethora Atlas Project",
+  "main": "envato.js",
+  "author": "kostasx <minaidisk@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "colors": "^1.1.2",
+    "got": "^6.7.1"
+  }
+}
