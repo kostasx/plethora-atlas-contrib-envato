@@ -1,6 +1,6 @@
 {
   "name": "plethora-atlas-contrib-envato",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Envato Utilities for the Plethora Atlas Project",
   "main": "envato.js",
   "author": "kostasx <minaidisk@gmail.com>",

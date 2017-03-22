@@ -13,10 +13,17 @@ envatoAPI =
 
 envato =
 
-    verify : ( options )->
+    init: (options)->
 
-        authorName   = options.authorName
-        authorAPIKey = options.authorAPIKey
+        @authorName   = options.authorName or ""
+        @authorAPIKey = options.authorAPIKey or ""
+        @token        = options.token or ""
+        return this
+
+    verify: (options)->
+
+        authorName   = @authorName
+        authorAPIKey = @authorAPIKey
         purchaseCode = options.verify.toString()
 
         if !purchaseCode then return
@@ -55,11 +62,12 @@ envato =
 
     getAccountInfo: (options)->
 
+        token = @token
         new Promise((resolve,reject)->
 
             require('request')
             .get( envatoAPI.account, 
-                { headers: { 'Authorization' : "Bearer #{options.envatoToken}"  } },
+                { headers: { 'Authorization' : "Bearer #{token}"  } },
                 (error, response, body) ->
 
                     if error
@@ -73,12 +81,12 @@ envato =
     getThemeDetails: (options)->
 
         return got(
-            envato.envatoAPI.catalogItem + options.id, 
+            envatoAPI.catalogItem + options.id, 
             { headers: { 'Authorization' : "Bearer #{options.envatoToken}"  } })
 
     getThemeSales: (options)->
 
-        envatoToken = options.envatoToken
+        envatoToken = @token
         envato.getThemeDetails({ id: options.id, envatoToken: envatoToken })
         .then((res)->
 
@@ -92,11 +100,13 @@ envato =
 
     getSales: (options)->
 
+        token = @token
+
         return got(
             envatoAPI.authorSales,
             {
                 json    : true 
-                headers : { 'Authorization' : "Bearer #{options.envatoToken}"  }
+                headers : { 'Authorization' : "Bearer #{token}"  }
             })
 
 module.exports = envato
